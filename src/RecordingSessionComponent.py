@@ -19,20 +19,20 @@ class RecordingSessionComponent(SessionComponent):
         self.pressed_buttons = []
         self.held_buttons = []
 
-        for note in pressed_notes:
+        for note, index in enumerate(pressed_notes):
             button = ButtonElement(True, MIDI_NOTE_TYPE, CHANNEL, identifier=note)
-            button.add_value_listener(partial(self.pressed_value_listener, note))
+            button.add_value_listener(partial(self.pressed_value_listener, index))
             self.pressed_buttons.append(button)
 
-        for note in held_notes:
+        for note, index in enumerate(held_notes):
             button = ButtonElement(True, MIDI_NOTE_TYPE, CHANNEL, identifier=note)
-            button.add_value_listener(partial(self.held_value_listener, note))
+            button.add_value_listener(partial(self.held_value_listener, index))
             self.held_buttons.append(button)
 
-    def pressed_value_listener(self, note: int, velocity: int):
+    def pressed_value_listener(self, index: int, velocity: int):
         if velocity > 0:
-            self.log(note)
+            self.log(index)
 
-    def held_value_listener(self, note: int, velocity: int):
+    def held_value_listener(self, index: int, velocity: int):
         if velocity > 0:
-            self.log(note)
+            self.log(index)
