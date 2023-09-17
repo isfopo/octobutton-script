@@ -12,7 +12,7 @@ from .mappings import CHANNEL, PRESSED_NOTES, HELD_NOTES
 
 class Octobutton(ControlSurface):
     __module__ = __name__
-    __doc__ = "SCript for the Octobutton MIDI device"
+    __doc__ = "Script for the Octobutton MIDI device"
     recording_session: RecordingSessionComponent
     pressed_buttons: List[ButtonElement]
     held_buttons: List[ButtonElement]
