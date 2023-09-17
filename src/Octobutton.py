@@ -3,6 +3,7 @@ from __future__ import with_statement
 import Live
 
 from _Framework.ControlSurface import ControlSurface
+from .RecordingSessionComponent import RecordingSessionComponent
 
 
 class Octobutton(ControlSurface):
@@ -17,7 +18,13 @@ class Octobutton(ControlSurface):
             self._live_minor_version = live.get_minor_version()
             self._live_bugfix_version = live.get_bugfix_version()
 
+            self._setup_recording_session()
+
     def disconnect(self):
         """clean up on disconnect"""
         ControlSurface.disconnect(self)
         return None
+
+    def _setup_recording_session(self):
+        self.recording_session = RecordingSessionComponent()
+        self.set_highlighting_session_component(self.recording_session)
