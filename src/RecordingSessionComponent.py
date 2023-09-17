@@ -1,3 +1,4 @@
+from functools import partial
 from typing import List
 from _Framework.ButtonElement import ButtonElement
 from _Framework.InputControlElement import MIDI_NOTE_TYPE
@@ -20,16 +21,18 @@ class RecordingSessionComponent(SessionComponent):
 
         for note in pressed_notes:
             button = ButtonElement(True, MIDI_NOTE_TYPE, CHANNEL, identifier=note)
-            button.add_value_listener(self.pressed_value_listener)
+            button.add_value_listener(partial(self.pressed_value_listener, note))
             self.pressed_buttons.append(button)
 
         for note in held_notes:
             button = ButtonElement(True, MIDI_NOTE_TYPE, CHANNEL, identifier=note)
-            button.add_value_listener(self.held_value_listener)
+            button.add_value_listener(partial(self.held_value_listener, note))
             self.held_buttons.append(button)
 
-    def pressed_value_listener(self, value: int):
-        self.log(value)
+    def pressed_value_listener(self, note: int, velocity: int):
+        self.log(note)
+        self.log(velocity)
 
-    def held_value_listener(self, value: int):
-        self.log(value)
+    def held_value_listener(self, note: int, velocity: int):
+        self.log(note)
+        self.log(velocity)
