@@ -30,9 +30,9 @@ class RecordingSessionComponent(SessionComponent):
             self.held_buttons.append(button)
 
     def pressed_value_listener(self, note: int, velocity: int):
-        self.log(note)
-        self.log(velocity)
+        if velocity > 0:
+            self.log(note)
 
     def held_value_listener(self, note: int, velocity: int):
-        self.log(note)
-        self.log(velocity)
+        if velocity > 0:
+            self.log(note)
