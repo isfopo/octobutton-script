@@ -1,5 +1,6 @@
 from functools import partial
 from typing import List
+from Live import Song, Track
 from _Framework.ButtonElement import ButtonElement
 from _Framework.InputControlElement import MIDI_NOTE_TYPE
 from _Framework.SessionComponent import SessionComponent
@@ -19,20 +20,26 @@ class RecordingSessionComponent(SessionComponent):
         self.pressed_buttons = []
         self.held_buttons = []
 
-        for note, index in enumerate(pressed_notes):
+        for index, note in enumerate(pressed_notes):
             button = ButtonElement(True, MIDI_NOTE_TYPE, CHANNEL, identifier=note)
             button.add_value_listener(partial(self.pressed_value_listener, index))
             self.pressed_buttons.append(button)
 
-        for note, index in enumerate(held_notes):
+        for index, note in enumerate(held_notes):
             button = ButtonElement(True, MIDI_NOTE_TYPE, CHANNEL, identifier=note)
             button.add_value_listener(partial(self.held_value_listener, index))
             self.held_buttons.append(button)
 
     def pressed_value_listener(self, index: int, velocity: int):
         if velocity > 0:
-            self.log(index)
+            self.log(self.get_track_at_index(index).name)
 
     def held_value_listener(self, index: int, velocity: int):
         if velocity > 0:
             self.log(index)
+
+    def song(self) -> Song.Song:
+        return SessionComponent.song(self)
+
+    def get_track_at_index(self, index: int) -> Track.Track:
+        return self.song().tracks[self.track_offset() + index]
