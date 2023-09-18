@@ -1,9 +1,10 @@
 from functools import partial
 from typing import List
-from Live import Song, Track
+from Live import Clip, ClipSlot, Song, Track
 from _Framework.ButtonElement import ButtonElement
 from _Framework.InputControlElement import MIDI_NOTE_TYPE
 from _Framework.SessionComponent import SessionComponent
+from .helpers.song import get_track_at_index
 from .mappings import CHANNEL
 
 
@@ -32,7 +33,8 @@ class RecordingSessionComponent(SessionComponent):
 
     def pressed_value_listener(self, index: int, velocity: int):
         if velocity > 0:
-            self.log(self.get_track_at_index(index).name)
+            track = get_track_at_index(self.song(), index, offset=self.track_offset())
+            last_clip = get_last_clip(track)
 
     def held_value_listener(self, index: int, velocity: int):
         if velocity > 0:
