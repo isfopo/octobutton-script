@@ -4,7 +4,7 @@ from Live import Clip, ClipSlot, Song, Track
 from _Framework.ButtonElement import ButtonElement
 from _Framework.InputControlElement import MIDI_NOTE_TYPE
 from _Framework.SessionComponent import SessionComponent
-from .helpers.track import get_first_empty_clip_slot, get_last_clip
+from .helpers.track import get_first_empty_clip_slot, get_last_clip, get_playing_clip
 from .helpers.song import get_track_at_index
 from .mappings import CHANNEL
 
@@ -49,7 +49,11 @@ class RecordingSessionComponent(SessionComponent):
 
     def held_value_listener(self, index: int, velocity: int):
         if velocity > 0:
-            self.log(index)
+            track = get_track_at_index(self.song(), index, offset=self.track_offset())
+            playing_clip = get_playing_clip(track)
+
+            if playing_clip is not None:
+                playing_clip.stop()
 
     def song(self) -> Song.Song:
         return SessionComponent.song(self)

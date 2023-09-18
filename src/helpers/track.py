@@ -34,3 +34,22 @@ def get_first_empty_clip_slot(track: Track.Track) -> ClipSlot.ClipSlot:
         if not slot.has_clip:
             return slot
     return None
+
+
+def get_playing_clip(track: Track.Track) -> Clip.Clip:
+    """Returns the clip that is playing on the given track
+
+    Args:
+        track (Track.Track): An Ableton Live Track
+
+    Returns:
+        Clip.Clip: Returns None if no clips are playing
+    """
+    slot: ClipSlot.ClipSlot
+    for slot in track.clip_slots:
+        if slot.has_clip:
+            clip: Clip.Clip = slot.clip
+            if clip.is_playing:
+                return clip
+        else:
+            return None
