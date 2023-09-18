@@ -17,9 +17,20 @@ def get_last_clip(track: Track.Track) -> Clip.Clip:
             clip = slot.clip
         else:
             break
-
     return clip
 
 
 def get_first_empty_clip_slot(track: Track.Track) -> ClipSlot.ClipSlot:
-    pass
+    """Returns the first empty Clip Slot
+
+    Args:
+        track (Track.Track): An Ableton Live Track
+
+    Returns:
+        ClipSlot.ClipSlot: Return None if all Slots are full. Create a new Scene if this is the case.
+    """
+    slot: ClipSlot.ClipSlot
+    for slot in track.clip_slots:
+        if not slot.has_clip:
+            return slot
+    return None
