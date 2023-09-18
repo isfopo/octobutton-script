@@ -38,7 +38,13 @@ class RecordingSessionComponent(SessionComponent):
             last_clip = get_last_clip(track)
 
             if last_clip is None or not last_clip.is_recording:
-                get_first_empty_clip_slot(track).fire()
+                first_slot = get_first_empty_clip_slot(track)
+                if first_slot is not None:
+                    first_slot.fire()
+                else:
+                    # add new scene
+                    # get first slot then fire
+                    pass
             else:
                 last_clip.fire()
 
