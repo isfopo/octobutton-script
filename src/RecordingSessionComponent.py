@@ -4,6 +4,7 @@ from Live import Clip, ClipSlot, Song, Track
 from _Framework.ButtonElement import ButtonElement
 from _Framework.InputControlElement import MIDI_NOTE_TYPE
 from _Framework.SessionComponent import SessionComponent
+from .helpers.track import get_last_clip
 from .helpers.song import get_track_at_index
 from .mappings import CHANNEL
 
@@ -42,6 +43,3 @@ class RecordingSessionComponent(SessionComponent):
 
     def song(self) -> Song.Song:
         return SessionComponent.song(self)
-
-    def get_track_at_index(self, index: int) -> Track.Track:
-        return self.song().tracks[self.track_offset() + index]
