@@ -1,5 +1,5 @@
 from functools import partial
-from typing import List
+from typing import Callable, List
 from Live import Clip, ClipSlot, Song, Track
 from _Framework.ButtonElement import ButtonElement
 from _Framework.InputControlElement import MIDI_NOTE_TYPE
@@ -10,6 +10,8 @@ from .mappings import CHANNEL
 
 
 class RecordingSessionComponent(SessionComponent):
+    song: Callable[..., Song.Song]
+
     def __init__(self, pressed_notes: List[int], held_notes: List[int], log=None):
         SessionComponent.__init__(
             self, num_tracks=8, num_scenes=1, auto_name=False, enable_skinning=False
@@ -54,6 +56,3 @@ class RecordingSessionComponent(SessionComponent):
 
             if playing_clip is not None:
                 playing_clip.stop()
-
-    def song(self) -> Song.Song:
-        return SessionComponent.song(self)
