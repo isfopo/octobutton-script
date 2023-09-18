@@ -37,9 +37,10 @@ class RecordingSessionComponent(SessionComponent):
             track = get_track_at_index(self.song(), index, offset=self.track_offset())
             last_clip = get_last_clip(track)
 
-            if last_clip is None:
-                first_slot = get_first_empty_clip_slot(track)
-                first_slot.fire()
+            if last_clip is None or not last_clip.is_recording:
+                get_first_empty_clip_slot(track).fire()
+            else:
+                last_clip.fire()
 
     def held_value_listener(self, index: int, velocity: int):
         if velocity > 0:
