@@ -2,6 +2,17 @@
 
 An Ableton Live Remote Script for the teensy-based [Octobutton MIDI device](https://github.com/isfopo/octobutton-embed) that provides the pedal with looper functionality using clips.
 
+## Usage
+
+The Octobutton is a 8 foot button MIDI controller designed with the "hand-bound" performer in mind. This script could be used for a MIDI device with any number of buttons, all you would need to do to adapt it is change the MIDI notes in the `mappings.py` file.
+
+### Install the Remote Script
+
+You have two options:
+
+- Clone this repo and run `python scripts/install.py` in the root directory of the repo. This runs a script that will place the Octobutton remote script in the remote scripts folder of Ableton. You will have to restart Ableton to see the script as available.
+- Manually install by copying the `src` folder to your User Library Remote Scripts folder. You should also change the name of the `src` folder to `Octobutton`. [You can follow Ableton's directions here.](https://help.ableton.com/hc/en-us/articles/209072009-Installing-third-party-remote-scripts)
+
 ## Resources
 
 [Structure Void's Live API version 11 Documentation](https://structure-void.com/PythonLiveAPI_documentation/Live11.0.xml),
