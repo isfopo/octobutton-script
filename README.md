@@ -10,7 +10,7 @@ The Octobutton is a 8 foot button MIDI controller designed with the "hand-bound"
 
 You have two options:
 
-- Clone this repo and run `python scripts/install.py` in the root directory of the repo. This runs a script that will place the Octobutton remote script in the remote scripts folder of Ableton. You will have to restart Ableton to see the script as available.
+- Clone this repo and run `python scripts/install.py --name Octobutton` (`python3` on Macs) in the root directory of the repo. This runs a script that will place the Octobutton remote script in the remote scripts folder of Ableton. You will have to restart Ableton to see the script as available.
 - Manually install by copying the `src` folder to your User Library Remote Scripts folder. You should also change the name of the `src` folder to `Octobutton`. [You can follow Ableton's directions here.](https://help.ableton.com/hc/en-us/articles/209072009-Installing-third-party-remote-scripts)
 
 ## Resources
