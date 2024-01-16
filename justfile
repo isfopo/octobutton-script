@@ -2,7 +2,7 @@ install:
 	python3 scripts/install.py --name Octobutton
 
 watch:
-	python3 scripts/watch.py --version 'Live 11.3.10'
+	python3 scripts/watch.py --version 'Live 11.3.20'
 
 close-set:
 	pkill -x Ableton Live 11 Suite
